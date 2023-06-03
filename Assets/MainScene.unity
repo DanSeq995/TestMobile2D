@@ -222,7 +222,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   jumpHeight: 0
-  maxSwipeTime: 0.5
+  maxSwipeTime: 0.05
   minSwipeDistance: 50
 --- !u!1 &1311916714
 GameObject:
