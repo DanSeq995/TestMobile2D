@@ -22,7 +22,7 @@ public class HealthController : MonoBehaviour
         health--;
         if (health == 0) {
             print("Game Over");
-            SceneManager.LoadScene("SampleScene");
+            SceneManager.LoadScene("GameOverScene");
         }
     }
 }
