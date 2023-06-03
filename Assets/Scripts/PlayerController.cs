@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour {
     //Swipe control
     public float maxSwipeTime;
     public float minSwipeDistance;
-
+    public Collider2D last_collider;
     private float swipeStartTime;
     private float swipeEndTime;
     private float swipeTime;
@@ -51,27 +51,29 @@ public class PlayerController : MonoBehaviour {
         }
     }
     void SwipeControl() {
-       
         Vector2 distance = endSwipePosition - startSwipePosition;
 
         //Mi prendo il valore  assoluto e poi vedo: se x è maggiore di y è uno swipe orizzontale, altrimenti è verticale
         float xDistance = Mathf.Abs(distance.x);
         float yDistance = Mathf.Abs(distance.y);
-
-        print("xDistance: " + xDistance);
-        print("yDistance: " + yDistance);
-
+        
         if(xDistance > yDistance) {
             if(distance.x > 0) {
-                MoveToPosition(new Vector2(player.transform.position.x + 1f, player.transform.position.y));
-            } else if(distance.x < 0) {
-                MoveToPosition(new Vector2(player.transform.position.x - 1f, player.transform.position.y));
+                RaycastHit2D[] hits = Physics2D.RaycastAll(player.transform.position, Vector2.right, 40f);
+                stepMovementWithRaycast(Vector2.right);
+            } 
+            else if(distance.x < 0) {
+                RaycastHit2D[] hits = Physics2D.RaycastAll(player.transform.position, Vector2.left, 40f);
+                stepMovementWithRaycast(Vector2.left);                
             }
         } else {
             if(distance.y > 0) {
-                MoveToPosition(new Vector2(player.transform.position.x, player.transform.position.y + 1f));
-            } else if(distance.y < 0) {
-                MoveToPosition(new Vector2(player.transform.position.x, player.transform.position.y - 1f));
+                RaycastHit2D[] hits = Physics2D.RaycastAll(player.transform.position, Vector2.up, 40f);
+                stepMovementWithRaycast(Vector2.up);               
+            } 
+            else if(distance.y < 0) {
+                RaycastHit2D[] hits = Physics2D.RaycastAll(player.transform.position, Vector2.down, 40f);
+                stepMovementWithRaycast(Vector2.down);
             }
         }
     }
@@ -80,6 +82,7 @@ public class PlayerController : MonoBehaviour {
         StartCoroutine(MoveSmoothly(targetPosition));
     }
 
+    //Serve a rendere lo spostamento più fluido. Si basa su moveSpeed.
     IEnumerator MoveSmoothly(Vector2 targetPosition) {
         Vector2 startPosition = player.transform.position;
         float t = 0f;
@@ -90,5 +93,23 @@ public class PlayerController : MonoBehaviour {
             yield return null;
         }   
     player.transform.position = targetPosition;
+    }
+
+    // Dato un vettore direzione, sposta il player nella direzione indicata verso il primo collider che incontra che
+    // non sia l'ultimo collider incontrato
+    void stepMovementWithRaycast(Vector2 direction) {
+        RaycastHit2D[] hits = Physics2D.RaycastAll(player.transform.position, direction, 40f);
+        foreach (var hit in hits)
+        {
+            if (hit.collider == last_collider){
+                continue;
+            }
+            else {
+                last_collider = hit.collider;
+                var hitPosition = hit.collider.bounds.center;
+                MoveToPosition(new Vector2(hitPosition.x, hitPosition.y));
+                break;
+            }
+        }
     }
 }
