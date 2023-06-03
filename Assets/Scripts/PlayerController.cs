@@ -1,8 +1,10 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
     
     public GameObject player;
+    public float moveSpeed = 15f;
     //Swipe control
     public float maxSwipeTime;
     public float minSwipeDistance;
@@ -15,9 +17,11 @@ public class PlayerController : MonoBehaviour {
     private Vector2 endSwipePosition;
     private float swipeLenght;
 
+    private Rigidbody2D rb;
+
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
@@ -59,23 +63,32 @@ public class PlayerController : MonoBehaviour {
 
         if(xDistance > yDistance) {
             if(distance.x > 0) {
-                player.transform.position = new Vector2(player.transform.position.x + 1, player.transform.position.y);
+                MoveToPosition(new Vector2(player.transform.position.x + 1f, player.transform.position.y));
             } else if(distance.x < 0) {
-                player.transform.position = new Vector2(player.transform.position.x - 1, player.transform.position.y);
+                MoveToPosition(new Vector2(player.transform.position.x - 1f, player.transform.position.y));
             }
         } else {
             if(distance.y > 0) {
-                player.transform.position = new Vector2(player.transform.position.x, player.transform.position.y + 1);
+                MoveToPosition(new Vector2(player.transform.position.x, player.transform.position.y + 1f));
             } else if(distance.y < 0) {
-                player.transform.position = new Vector2(player.transform.position.x, player.transform.position.y - 1);
+                MoveToPosition(new Vector2(player.transform.position.x, player.transform.position.y - 1f));
             }
         }
     }
 
-    /*
-    void FlipAndMove() {
-        dir = -dir;
-        transform.Rotate(0, 180, 0);
-        facingRight = !facingRight;
-    }*/
+    void MoveToPosition(Vector2 targetPosition) {
+        StartCoroutine(MoveSmoothly(targetPosition));
+    }
+
+    IEnumerator MoveSmoothly(Vector2 targetPosition) {
+        Vector2 startPosition = player.transform.position;
+        float t = 0f;
+
+        while (t < 1f) {
+            t += Time.deltaTime * moveSpeed;
+            player.transform.position = Vector2.Lerp(startPosition, targetPosition, t);
+            yield return null;
+        }   
+    player.transform.position = targetPosition;
+    }
 }
