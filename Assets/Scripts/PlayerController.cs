@@ -1,13 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
+    
     float dir = 1f;
     public float speed;
     public float jumpHeight;
 
-    private Rigidbody2D rb;
+    //private Rigidbody2D rb;
 
     bool facingRight = true;
 
@@ -25,13 +24,13 @@ public class PlayerController : MonoBehaviour {
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+    print("Start");
+        //rb = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        rb.velocity = new Vector2(dir * speed * Time.deltaTime, rb.velocity.y);
+        //rb.velocity = new Vector2(dir * speed * Time.deltaTime, rb.velocity.y);
         SwipeTest();
     }
 
@@ -42,21 +41,30 @@ public class PlayerController : MonoBehaviour {
             if(touch.phase == TouchPhase.Began){
                 swipeStartTime = Time.time;
                 startSwipePosition = touch.position;
-            } else if(touch.phase == TouchPhase.Ended) {
+                print("Touch Began");
+            } 
+            else if(touch.phase == TouchPhase.Ended) {
                 swipeEndTime = Time.time;
                 endSwipePosition = touch.position;
+                print("Touch Ended");
 
                 swipeTime = swipeEndTime - swipeStartTime;
                 swipeLenght = (endSwipePosition - startSwipePosition).magnitude;
 
+                print("Swipe Time: " + swipeTime);
+                print("Swipe Lenght: " + swipeLenght);
+
                 if(swipeTime < maxSwipeTime && swipeLenght > minSwipeDistance) {
-                    SwipeControl();
+                    //SwipeControl();
+                    print("Swipe");
                 }
             }
         }
     }
 
+    /*
     void SwipeControl() {
+       
         Vector2 distance = endSwipePosition - startSwipePosition;
 
         //Mi prendo il valore  assoluto e poi vedo: se x è maggiore di y è uno swipe orizzontale, altrimenti è verticale
@@ -76,5 +84,5 @@ public class PlayerController : MonoBehaviour {
         dir = -dir;
         transform.Rotate(0, 180, 0);
         facingRight = !facingRight;
-    }
+    }*/
 }
