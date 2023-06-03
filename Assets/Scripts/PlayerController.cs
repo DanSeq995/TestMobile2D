@@ -24,7 +24,6 @@ public class PlayerController : MonoBehaviour {
 
     void Start()
     {
-    print("Start");
         //rb = GetComponent<Rigidbody2D>();
     }
 
@@ -41,28 +40,20 @@ public class PlayerController : MonoBehaviour {
             if(touch.phase == TouchPhase.Began){
                 swipeStartTime = Time.time;
                 startSwipePosition = touch.position;
-                print("Touch Began");
             } 
             else if(touch.phase == TouchPhase.Ended) {
                 swipeEndTime = Time.time;
                 endSwipePosition = touch.position;
-                print("Touch Ended");
 
                 swipeTime = swipeEndTime - swipeStartTime;
                 swipeLenght = (endSwipePosition - startSwipePosition).magnitude;
 
-                print("Swipe Time: " + swipeTime);
-                print("Swipe Lenght: " + swipeLenght);
-
                 if(swipeTime < maxSwipeTime && swipeLenght > minSwipeDistance) {
-                    //SwipeControl();
-                    print("Swipe");
+                    SwipeControl();
                 }
             }
         }
     }
-
-    /*
     void SwipeControl() {
        
         Vector2 distance = endSwipePosition - startSwipePosition;
@@ -71,15 +62,25 @@ public class PlayerController : MonoBehaviour {
         float xDistance = Mathf.Abs(distance.x);
         float yDistance = Mathf.Abs(distance.y);
 
+        print("xDistance: " + xDistance);
+        print("yDistance: " + yDistance);
+
         if(xDistance > yDistance) {
-            if(distance.x > 0 && !facingRight) {
-                FlipAndMove();
-            } else if(distance.x < 0 && facingRight) {
-                FlipAndMove();
+            if(distance.x > 0) {
+                print("Swipe destro");
+            } else if(distance.x < 0) {
+                print("Swipe sinistro");
+            }
+        } else {
+            if(distance.y > 0) {
+                print("Swipe alto");
+            } else if(distance.y < 0) {
+                print("Swipe basso");
             }
         }
     }
 
+    /*
     void FlipAndMove() {
         dir = -dir;
         transform.Rotate(0, 180, 0);
