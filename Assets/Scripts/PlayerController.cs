@@ -104,7 +104,7 @@ public class PlayerController : MonoBehaviour {
             if (hit.collider == last_collider){
                 continue;
             }
-            else {
+            else if (hit.collider.gameObject.layer == 6) {
                 last_collider = hit.collider;
                 var hitPosition = hit.collider.bounds.center;
                 MoveToPosition(new Vector2(hitPosition.x, hitPosition.y));

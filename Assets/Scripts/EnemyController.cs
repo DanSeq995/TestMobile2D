@@ -11,7 +11,12 @@ public class EnemyController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
     }
-
+    void Start() {
+        Invoke("destroyEnemy", 3f);
+    }
+    void destroyEnemy() {
+        Destroy(this.gameObject);
+    }
     // Update is called once per frame
     void Update()
     {
