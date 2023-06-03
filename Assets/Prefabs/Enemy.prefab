@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1190926326936209016}
   m_Layer: 7
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -100,7 +100,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  direction: {x: 0, y: 0}
   rb: {fileID: 0}
 --- !u!61 &-860803191561751350
 BoxCollider2D:

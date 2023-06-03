@@ -706,6 +706,7 @@ GameObject:
   - component: {fileID: 670326391}
   - component: {fileID: 670326390}
   - component: {fileID: 670326389}
+  - component: {fileID: 670326394}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -726,6 +727,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 670326388}
+  healthController: {fileID: 0}
   moveSpeed: 15
   maxSwipeTime: 0.5
   minSwipeDistance: 50
@@ -869,6 +871,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &670326394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 670326388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50c40cb0d46ca4db09650e071580eb5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &701799587
 PrefabInstance:
   m_ObjectHideFlags: 0
