@@ -4,6 +4,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
     
     public GameObject player;
+    public HealthController healthController;
     public float moveSpeed = 15f;
     //Swipe control
     public float maxSwipeTime;
@@ -22,6 +23,7 @@ public class PlayerController : MonoBehaviour {
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        healthController = GetComponent<HealthController>();
     }
 
     void Update()
@@ -110,6 +112,12 @@ public class PlayerController : MonoBehaviour {
                 MoveToPosition(new Vector2(hitPosition.x, hitPosition.y));
                 break;
             }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        if(other.gameObject.tag == "Enemy") {
+            healthController.damage();
         }
     }
 }
