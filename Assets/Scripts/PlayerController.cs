@@ -2,14 +2,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
     
-    float dir = 1f;
-    public float speed;
-    public float jumpHeight;
-
-    //private Rigidbody2D rb;
-
-    bool facingRight = true;
-
+    public GameObject player;
     //Swipe control
     public float maxSwipeTime;
     public float minSwipeDistance;
@@ -24,12 +17,11 @@ public class PlayerController : MonoBehaviour {
 
     void Start()
     {
-        //rb = GetComponent<Rigidbody2D>();
+        
     }
 
     void Update()
     {
-        //rb.velocity = new Vector2(dir * speed * Time.deltaTime, rb.velocity.y);
         SwipeTest();
     }
 
@@ -67,15 +59,15 @@ public class PlayerController : MonoBehaviour {
 
         if(xDistance > yDistance) {
             if(distance.x > 0) {
-                print("Swipe destro");
+                player.transform.position = new Vector2(player.transform.position.x + 1, player.transform.position.y);
             } else if(distance.x < 0) {
-                print("Swipe sinistro");
+                player.transform.position = new Vector2(player.transform.position.x - 1, player.transform.position.y);
             }
         } else {
             if(distance.y > 0) {
-                print("Swipe alto");
+                player.transform.position = new Vector2(player.transform.position.x, player.transform.position.y + 1);
             } else if(distance.y < 0) {
-                print("Swipe basso");
+                player.transform.position = new Vector2(player.transform.position.x, player.transform.position.y - 1);
             }
         }
     }
