@@ -5,11 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class HealthController : MonoBehaviour
 {
-    int health = 1;
+    int health;
     // Start is called before the first frame update
     void Start()
     {
-        
+        setHealth();
     }
 
     // Update is called once per frame
@@ -24,5 +24,9 @@ public class HealthController : MonoBehaviour
             print("Game Over");
             SceneManager.LoadScene("GameOverScene");
         }
+    }
+
+    void setHealth(){
+        health = 1;
     }
 }
