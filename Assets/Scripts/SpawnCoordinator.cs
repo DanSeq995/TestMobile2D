@@ -5,8 +5,10 @@ using UnityEngine;
 
 public class SpawnCoordinator : MonoBehaviour
 {
+    public GameObject multiplierStar;
     public double spawnTime = 0;
     public float spawnSpeed = 2.5f;
+    Vector2 playerposition; 
     // Start is called before the first frame update
     void Start()
     {
@@ -21,11 +23,23 @@ public class SpawnCoordinator : MonoBehaviour
     }
 
     void difficultyChange(){
+        spawnMultiplier();
         if(spawnSpeed >= 1.2){
             spawnSpeed -= 0.2f;
             print("SpawnSpeed: " + spawnSpeed);
             }
     }
+    void spawnMultiplier(){
+        Vector2 position;
+        do{
+        var number = UnityEngine.Random.Range(0,9);
+        var stage = GameObject.Find("Stage");
+        var stagePoints = stage.GetComponentsInChildren<SpriteRenderer>();
+        position = stagePoints[number].transform.position;
+        }while(playerposition == position);
+        Instantiate(multiplierStar, position, Quaternion.identity);
+    }
+    
     void spawnRoutine()
     {
         GameObject[] spawnPoints = new GameObject[] { };
@@ -38,5 +52,9 @@ public class SpawnCoordinator : MonoBehaviour
             spawnPoint.GetComponent<SpawnPointController>().activateSpawn();
         }
         Invoke("spawnRoutine", spawnSpeed);
+    }
+
+    public void SetPlayerPosition(Vector2 lastPosition){
+        playerposition = lastPosition;
     }
 }
