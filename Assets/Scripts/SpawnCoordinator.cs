@@ -13,6 +13,7 @@ public class SpawnCoordinator : MonoBehaviour
     void Start()
     {
         InvokeRepeating("difficultyChange", 0f, 10f);
+        InvokeRepeating("spawnMultiplier", 0f, 5f);
         spawnRoutine();
     }
 
@@ -23,7 +24,6 @@ public class SpawnCoordinator : MonoBehaviour
     }
 
     void difficultyChange(){
-        spawnMultiplier();
         if(spawnSpeed >= 1.2){
             spawnSpeed -= 0.2f;
             print("SpawnSpeed: " + spawnSpeed);
@@ -57,4 +57,5 @@ public class SpawnCoordinator : MonoBehaviour
     public void SetPlayerPosition(Vector2 lastPosition){
         playerposition = lastPosition;
     }
+
 }
