@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour {
     public HealthController healthController;
     public ScoreController scoreController;
     public SpawnCoordinator spawnCoordinator;
+    public PowerController powerController;
     public float moveSpeed = 15f;
     //Swipe control
     public float maxSwipeTime;
@@ -28,12 +29,18 @@ public class PlayerController : MonoBehaviour {
         healthController = GetComponent<HealthController>();
         scoreController = GameObject.Find("UI").GetComponent<ScoreController>();
         spawnCoordinator = GameObject.Find("SpawnPoints").GetComponent<SpawnCoordinator>();
+        powerController = GameObject.Find("UI").GetComponent<PowerController>();
 
     }
 
     void Update()
     {
         SwipeTest();
+        if(scoreController.multiplier > 1){
+            powerController.activatePower();
+        }else{
+            powerController.deactivatePower();
+        }
     }
 
     //Questa funzione controlla che il movimento a schermo sia effettivamente uno swipe, sia in termini di tempo che di distanza sullo schermo
