@@ -5,6 +5,9 @@ public class PlayerController : MonoBehaviour {
     
     public GameObject player;
     public HealthController healthController;
+    public ScoreController scoreController;
+    public SpawnCoordinator spawnCoordinator;
+    public PowerController powerController;
     public float moveSpeed = 15f;
     //Swipe control
     public float maxSwipeTime;
@@ -24,11 +27,20 @@ public class PlayerController : MonoBehaviour {
     {
         rb = GetComponent<Rigidbody2D>();
         healthController = GetComponent<HealthController>();
+        scoreController = GameObject.Find("UI").GetComponent<ScoreController>();
+        spawnCoordinator = GameObject.Find("SpawnPoints").GetComponent<SpawnCoordinator>();
+        powerController = GameObject.Find("UI").GetComponent<PowerController>();
+
     }
 
     void Update()
     {
         SwipeTest();
+        if(scoreController.multiplier > 1){
+            powerController.activatePower();
+        }else{
+            powerController.deactivatePower();
+        }
     }
 
     //Questa funzione controlla che il movimento a schermo sia effettivamente uno swipe, sia in termini di tempo che di distanza sullo schermo
@@ -95,6 +107,7 @@ public class PlayerController : MonoBehaviour {
             yield return null;
         }   
     player.transform.position = targetPosition;
+    spawnCoordinator.SetPlayerPosition(targetPosition);
     }
 
     // Dato un vettore direzione, sposta il player nella direzione indicata verso il primo collider che incontra che
@@ -118,6 +131,11 @@ public class PlayerController : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.tag == "Enemy") {
             healthController.damage();
+            scoreController.ResetMultiplier();
+        }
+        if(other.gameObject.tag == "Star"){
+            scoreController.RaiseMultiplier();
+            Destroy(other.gameObject);
         }
     }
 }
