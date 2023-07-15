@@ -6,26 +6,29 @@ using TMPro;
 public class VolumeController : MonoBehaviour
 {
     public TextMeshProUGUI volumeUI;
-    private int volume;
+    private int volume = 0;
 
     private void Start()
     {
-        volume = 0;
+        volume = PlayerPrefs.GetInt("Volume", 0);
         SetVolume(volume);
     }
 
     public void VolumeUp()
     {
-        print(volume);
-        volume = volume + 1;
+        volume++;
+        PlayerPrefs.SetInt("Volume", volume);
+        PlayerPrefs.Save();
         SetVolume(volume);
     }
 
     public void VolumeDown()
     {
-        print(volume);
-        volume = volume - 1;
-        SetVolume(volume);        
+        if(volume > 0) {
+            volume--;
+            PlayerPrefs.SetInt("Volume", volume);
+            SetVolume(volume);
+        }
     }
 
     private void SetVolume(int volume)
