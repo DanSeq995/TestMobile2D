@@ -5,34 +5,35 @@ using TMPro;
 
 public class VolumeController : MonoBehaviour
 {
-    public TextMeshProUGUI volumeUI;
-    private int volume = 0;
+    public TextMeshProUGUI spawnSpeedUI;
+    public float spawnSpeed = 2.5f;
 
     private void Start()
     {
-        volume = PlayerPrefs.GetInt("Volume", 0);
-        SetVolume(volume);
+        spawnSpeed = PlayerPrefs.GetFloat("spawnSpeed", 2.5f);
+        SetSpawnSpeed(spawnSpeed);
     }
 
-    public void VolumeUp()
+    public void SpawnSpeedUp()
     {
-        volume++;
-        PlayerPrefs.SetInt("Volume", volume);
+        spawnSpeed = spawnSpeed + 0.5f;
+        PlayerPrefs.SetFloat("spawnSpeed", spawnSpeed);
         PlayerPrefs.Save();
-        SetVolume(volume);
+        SetSpawnSpeed(spawnSpeed);
     }
 
-    public void VolumeDown()
+    public void SpawnSpeedDown()
     {
-        if(volume > 0) {
-            volume--;
-            PlayerPrefs.SetInt("Volume", volume);
-            SetVolume(volume);
+        if(spawnSpeed > 0) {
+            spawnSpeed = spawnSpeed - 0.5f;
+            PlayerPrefs.SetFloat("spawnSpeed", spawnSpeed);
+            PlayerPrefs.Save();
+            SetSpawnSpeed(spawnSpeed);
         }
     }
 
-    private void SetVolume(int volume)
+    private void SetSpawnSpeed(float spawnSpeed)
     {
-        volumeUI.text = volume.ToString();
+        spawnSpeedUI.text = spawnSpeed.ToString();
     }
 }
