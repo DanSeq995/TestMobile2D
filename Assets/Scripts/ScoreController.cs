@@ -47,6 +47,5 @@ public class ScoreController : MonoBehaviour
     public void ResetMultiplier(){
         multiplier = 1;
         multiplierUI.SetText("x"+ multiplier.ToString());
-
     }
 }
