@@ -12,12 +12,18 @@ public class ScoreController : MonoBehaviour
     public TextMeshProUGUI multiplierUI;
 
     public float score = 0;
-    public int multiplier = 1;
+    public int multiplier;
 
     // Start is called before the first frame update
     void Start()
     {
-        multiplierUI.SetText("x"+ multiplier.ToString());
+        if(VolumeController.isDeveloperMode) {
+            multiplier = PlayerPrefs.GetInt("multiplier", 1);
+            multiplierUI.SetText("x"+ multiplier.ToString());
+        } else {
+            multiplier = 1;
+            multiplierUI.SetText("x"+ multiplier.ToString());
+        }
     }
 
     // Update is called once per frame

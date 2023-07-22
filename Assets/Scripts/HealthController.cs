@@ -27,9 +27,11 @@ public class HealthController : MonoBehaviour
     }
 
     void setHealth(){
-        if(VolumeController.isDeveloperMode) {
+        if(VolumeController.isDeveloperMode && VolumeController.isGodMode) {
+            print("God Mode");
             health = 10000;
         } else {
+            print("No God Mode");
             health = 1;
         }
     }

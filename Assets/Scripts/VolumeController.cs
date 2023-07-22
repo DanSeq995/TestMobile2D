@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class VolumeController : MonoBehaviour
 {
-    public static bool isDeveloperMode = false;
+    public static bool isDeveloperMode = true;
 
     public TextMeshProUGUI spawnSpeedUI;
     private float spawnSpeed;
@@ -15,6 +16,9 @@ public class VolumeController : MonoBehaviour
 
     public TextMeshProUGUI multiplierUI;
     private int multiplier;
+
+    public Toggle godMode;
+    public static bool isGodMode;
 
     private void Start()
     {
@@ -26,6 +30,8 @@ public class VolumeController : MonoBehaviour
 
         multiplier = PlayerPrefs.GetInt("multiplier", 1);
         SetMultiplier(multiplier);
+
+        godMode.onValueChanged.AddListener(OnToggleValueChanged);
     }
 
     public void SpawnSpeedUp()
@@ -81,12 +87,24 @@ public class VolumeController : MonoBehaviour
         if(multiplier > 0) {
             if(multiplier == 2) {
                 multiplier--;
-            } else if(multiplier < 8){
+            } else if(multiplier > 2){
                 multiplier = multiplier - 2;
             }
             PlayerPrefs.SetInt("multiplier", multiplier);
             PlayerPrefs.Save();
             SetMultiplier(multiplier);
+        }
+    }
+
+    private void OnToggleValueChanged(bool newValue)
+    {
+        if (newValue)
+        {
+            isGodMode = true;
+        }
+        else
+        {
+            isGodMode = false;
         }
     }
 

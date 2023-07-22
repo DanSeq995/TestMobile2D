@@ -30,7 +30,6 @@ public class PlayerController : MonoBehaviour {
         scoreController = GameObject.Find("UI").GetComponent<ScoreController>();
         spawnCoordinator = GameObject.Find("SpawnPoints").GetComponent<SpawnCoordinator>();
         powerController = GameObject.Find("UI").GetComponent<PowerController>();
-
     }
 
     void Update()
@@ -131,16 +130,12 @@ public class PlayerController : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.tag == "Enemy") {
             healthController.damage();
-            if(VolumeController.isDeveloperMode) {
-
-            } else {
+            if(!VolumeController.isDeveloperMode) {
                 scoreController.ResetMultiplier();
             }
         }
         if(other.gameObject.tag == "Star"){
-            if(VolumeController.isDeveloperMode) {
-
-            } else {
+            if(!VolumeController.isDeveloperMode) {
                 scoreController.RaiseMultiplier();
             }
             Destroy(other.gameObject);
