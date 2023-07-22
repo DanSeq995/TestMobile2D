@@ -38,8 +38,8 @@ public class ScoreController : MonoBehaviour
             multiplier += 1;
         }else{
             if(multiplier < 8){
-            multiplier = multiplier + 2;
-        }
+                multiplier = multiplier + 2;
+            }
         }
         multiplierUI.SetText("x"+ multiplier.ToString());
     }
@@ -47,6 +47,5 @@ public class ScoreController : MonoBehaviour
     public void ResetMultiplier(){
         multiplier = 1;
         multiplierUI.SetText("x"+ multiplier.ToString());
-
     }
 }

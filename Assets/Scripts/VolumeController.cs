@@ -5,11 +5,16 @@ using TMPro;
 
 public class VolumeController : MonoBehaviour
 {
+    public static bool isDeveloperMode = false;
+
     public TextMeshProUGUI spawnSpeedUI;
     private float spawnSpeed;
 
     public TextMeshProUGUI enemySpeedUI;
     private float enemySpeed;
+
+    public TextMeshProUGUI multiplierUI;
+    private int multiplier;
 
     private void Start()
     {
@@ -18,14 +23,17 @@ public class VolumeController : MonoBehaviour
 
         enemySpeed = PlayerPrefs.GetFloat("enemySpeed", 10.0f);
         SetEnemySpeed(enemySpeed);
+
+        multiplier = PlayerPrefs.GetInt("multiplier", 1);
+        SetMultiplier(multiplier);
     }
 
     public void SpawnSpeedUp()
     {
         spawnSpeed = spawnSpeed + 0.5f;
-            PlayerPrefs.SetFloat("spawnSpeed", spawnSpeed);
-            PlayerPrefs.Save();
-            SetSpawnSpeed(spawnSpeed);
+        PlayerPrefs.SetFloat("spawnSpeed", spawnSpeed);
+        PlayerPrefs.Save();
+        SetSpawnSpeed(spawnSpeed);
     }
 
     public void SpawnSpeedDown()
@@ -56,6 +64,32 @@ public class VolumeController : MonoBehaviour
         }
     }
 
+    public void MultiplierUp()
+    {
+        if(multiplier == 1) {
+            multiplier++;
+        } else if(multiplier < 8){
+            multiplier = multiplier + 2;
+        }
+        PlayerPrefs.SetInt("multiplier", multiplier);
+        PlayerPrefs.Save();
+        SetMultiplier(multiplier);
+    }
+
+    public void MultiplierDown()
+    {
+        if(multiplier > 0) {
+            if(multiplier == 2) {
+                multiplier--;
+            } else if(multiplier < 8){
+                multiplier = multiplier - 2;
+            }
+            PlayerPrefs.SetInt("multiplier", multiplier);
+            PlayerPrefs.Save();
+            SetMultiplier(multiplier);
+        }
+    }
+
     private void SetSpawnSpeed(float spawnSpeed)
     {
         spawnSpeedUI.text = spawnSpeed.ToString();
@@ -64,5 +98,10 @@ public class VolumeController : MonoBehaviour
     private void SetEnemySpeed(float enemySpeed)
     {
         enemySpeedUI.text = enemySpeed.ToString();
+    }
+
+    private void SetMultiplier(int multiplier)
+    {
+        multiplierUI.text = multiplier.ToString();
     }
 }

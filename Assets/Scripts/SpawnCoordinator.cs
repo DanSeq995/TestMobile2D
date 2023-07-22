@@ -7,12 +7,18 @@ public class SpawnCoordinator : MonoBehaviour
 {
     public GameObject multiplierStar;
     public double spawnTime = 0;
-    public float spawnSpeed;
+    public float spawnSpeed = 2.5f;
     Vector2 playerposition; 
-    // Start is called before the first frame update
+
+
     void Start()
     {
-        spawnSpeed = PlayerPrefs.GetFloat("spawnSpeed", 2.5f);
+        if (VolumeController.isDeveloperMode){
+            spawnSpeed = PlayerPrefs.GetFloat("spawnSpeed", 2.5f);
+        } else {
+            spawnSpeed = 2.5f;
+        }
+
         InvokeRepeating("difficultyChange", 0f, 10f);
         InvokeRepeating("spawnMultiplier", 0f, 5f);
         spawnRoutine();
@@ -21,7 +27,6 @@ public class SpawnCoordinator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        print(spawnSpeed);
         spawnTime += Time.deltaTime;
     }
 

@@ -4,14 +4,18 @@ using UnityEngine;
 
 public class SpawnPointController : MonoBehaviour
 {
+    private float speed;
     public GameObject enemy;
     public Vector2 direction;
     public void activateSpawn() {
         var enemyObj = Instantiate(enemy, transform.position, Quaternion.identity);
-        var speed = PlayerPrefs.GetFloat("enemySpeed", 10.0f);
-        enemyObj.GetComponent<EnemyController>().rb.AddForce(direction * speed, ForceMode2D.Impulse);
-        
 
+        if (VolumeController.isDeveloperMode){
+            speed = PlayerPrefs.GetFloat("enemySpeed", 10.0f);
+        } else {
+            speed = 10.0f;
+        }
+        enemyObj.GetComponent<EnemyController>().rb.AddForce(direction * speed, ForceMode2D.Impulse);
     }
   
     // Start is called before the first frame update

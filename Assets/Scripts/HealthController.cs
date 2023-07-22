@@ -27,6 +27,10 @@ public class HealthController : MonoBehaviour
     }
 
     void setHealth(){
-        health = 1;
+        if(VolumeController.isDeveloperMode) {
+            health = 10000;
+        } else {
+            health = 1;
+        }
     }
 }

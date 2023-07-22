@@ -131,10 +131,18 @@ public class PlayerController : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.tag == "Enemy") {
             healthController.damage();
-            scoreController.ResetMultiplier();
+            if(VolumeController.isDeveloperMode) {
+
+            } else {
+                scoreController.ResetMultiplier();
+            }
         }
         if(other.gameObject.tag == "Star"){
-            scoreController.RaiseMultiplier();
+            if(VolumeController.isDeveloperMode) {
+
+            } else {
+                scoreController.RaiseMultiplier();
+            }
             Destroy(other.gameObject);
         }
     }
