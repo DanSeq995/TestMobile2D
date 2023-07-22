@@ -8,7 +8,7 @@ public class SpawnPointController : MonoBehaviour
     public Vector2 direction;
     public void activateSpawn() {
         var enemyObj = Instantiate(enemy, transform.position, Quaternion.identity);
-        var speed = enemyObj.GetComponent<EnemyController>().speed;
+        var speed = PlayerPrefs.GetFloat("enemySpeed", 10.0f);
         enemyObj.GetComponent<EnemyController>().rb.AddForce(direction * speed, ForceMode2D.Impulse);
         
 

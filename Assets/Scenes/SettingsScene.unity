@@ -219,19 +219,44 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemySpeedLabel
       objectReference: {fileID: 0}
+    - target: {fileID: 2696748466170553357, guid: e4a9dbff53a9c4b689bd0f4246dde614, type: 3}
+      propertyPath: m_text
+      value: '- 1'
+      objectReference: {fileID: 0}
     - target: {fileID: 2721008217943801981, guid: e4a9dbff53a9c4b689bd0f4246dde614, type: 3}
       propertyPath: m_text
       value: Enemy Speed
+      objectReference: {fileID: 0}
+    - target: {fileID: 4201872367061997760, guid: e4a9dbff53a9c4b689bd0f4246dde614, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 447379345}
+    - target: {fileID: 4201872367061997760, guid: e4a9dbff53a9c4b689bd0f4246dde614, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: EnemySpeedUp
       objectReference: {fileID: 0}
     - target: {fileID: 6119038073399416234, guid: e4a9dbff53a9c4b689bd0f4246dde614, type: 3}
       propertyPath: m_Name
       value: EnemySpeedValue
       objectReference: {fileID: 0}
+    - target: {fileID: 7037308934794764900, guid: e4a9dbff53a9c4b689bd0f4246dde614, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 447379345}
+    - target: {fileID: 7037308934794764900, guid: e4a9dbff53a9c4b689bd0f4246dde614, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: EnemySpeedDown
+      objectReference: {fileID: 0}
     - target: {fileID: 8838518538811776010, guid: e4a9dbff53a9c4b689bd0f4246dde614, type: 3}
       propertyPath: m_Name
       value: Settings Item Enemy Speed
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 9121269076439703209, guid: e4a9dbff53a9c4b689bd0f4246dde614, type: 3}
+      propertyPath: m_text
+      value: + 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 0}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -241,6 +266,28 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 78384837910436583, guid: e4a9dbff53a9c4b689bd0f4246dde614, type: 3}
   m_PrefabInstance: {fileID: 38366948}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &38366950 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5365686269287533696, guid: e4a9dbff53a9c4b689bd0f4246dde614, type: 3}
+  m_PrefabInstance: {fileID: 38366948}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &228000868 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5365686269287533696, guid: e4a9dbff53a9c4b689bd0f4246dde614, type: 3}
+  m_PrefabInstance: {fileID: 1290741296382172967}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &447379340
 GameObject:
   m_ObjectHideFlags: 0
@@ -253,6 +300,7 @@ GameObject:
   - component: {fileID: 447379343}
   - component: {fileID: 447379342}
   - component: {fileID: 447379341}
+  - component: {fileID: 447379345}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -346,6 +394,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &447379345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 447379340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23001fe7903bc4002a44d0a382519a71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnSpeedUI: {fileID: 228000868}
+  enemySpeedUI: {fileID: 38366950}
 --- !u!1001 &634126860
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -770,11 +832,28 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4201872367061997760, guid: e4a9dbff53a9c4b689bd0f4246dde614, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 447379345}
+    - target: {fileID: 4201872367061997760, guid: e4a9dbff53a9c4b689bd0f4246dde614, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SpawnSpeedUp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7037308934794764900, guid: e4a9dbff53a9c4b689bd0f4246dde614, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 447379345}
+    - target: {fileID: 7037308934794764900, guid: e4a9dbff53a9c4b689bd0f4246dde614, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SpawnSpeedDown
+      objectReference: {fileID: 0}
     - target: {fileID: 8838518538811776010, guid: e4a9dbff53a9c4b689bd0f4246dde614, type: 3}
       propertyPath: m_Name
       value: Settings Item Spawn Speed
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
