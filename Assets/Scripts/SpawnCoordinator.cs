@@ -7,11 +7,12 @@ public class SpawnCoordinator : MonoBehaviour
 {
     public GameObject multiplierStar;
     public double spawnTime = 0;
-    public float spawnSpeed = 2.5f;
+    public float spawnSpeed;
     Vector2 playerposition; 
     // Start is called before the first frame update
     void Start()
     {
+        spawnSpeed = PlayerPrefs.GetFloat("spawnSpeed", 2.5f);
         InvokeRepeating("difficultyChange", 0f, 10f);
         InvokeRepeating("spawnMultiplier", 0f, 5f);
         spawnRoutine();
@@ -20,14 +21,14 @@ public class SpawnCoordinator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        print(spawnSpeed);
         spawnTime += Time.deltaTime;
     }
 
     void difficultyChange(){
         if(spawnSpeed >= 1.2){
             spawnSpeed -= 0.2f;
-            print("SpawnSpeed: " + spawnSpeed);
-            }
+        }
     }
     void spawnMultiplier(){
         Vector2 position;
@@ -54,8 +55,6 @@ public class SpawnCoordinator : MonoBehaviour
             var triggerIndex = UnityEngine.Random.Range(0, 9);
             spawnTriggers[triggerIndex] = true;
             }
-            print("STO GRAN CAZZO");
-            print(!checkSpawnPossibility(spawnTriggers) + "SPAWN CHECK");
         } while(!checkSpawnPossibility(spawnTriggers));
         for (var i = 0; i < 9; i++) {
             if(spawnTriggers[i]) {
@@ -87,7 +86,6 @@ public class SpawnCoordinator : MonoBehaviour
             print(firstArray[i]);
         }
         bool[,] escapeMatrix = new bool[3,3];
-        print("BRUH");
         escapeMatrix[0,0] = firstArray[0] || secondArray[0] || thirdArray[2];
         escapeMatrix[0,1] = firstArray[0] || secondArray[1] || thirdArray[2];
         escapeMatrix[0,2] = firstArray[0] || secondArray[2] || thirdArray[2];
@@ -98,7 +96,6 @@ public class SpawnCoordinator : MonoBehaviour
         escapeMatrix[2,1] = firstArray[2] || secondArray[1] || thirdArray[0];
         escapeMatrix[2,2] = firstArray[2] || secondArray[2] || thirdArray[0];
 
-        print("AAAAAAH" + escapeMatrix);
         for (int i = 0; i < 3; i++){
             for (int j = 0; j < 3; j++){
                 if (escapeMatrix[i,j] == false){
