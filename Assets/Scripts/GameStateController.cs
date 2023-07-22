@@ -6,10 +6,12 @@ using UnityEngine.SceneManagement;
 public class GameStateController : MonoBehaviour
 {
     public GameObject pauseMenu;
+    public SoundManager soundManager;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        Time.timeScale = 1.0f;
     }
 
     // Update is called once per frame
@@ -29,7 +31,6 @@ public class GameStateController : MonoBehaviour
     }
 
     public void RetryGame(){
-        Time.timeScale = 1.0f;
         pauseMenu.SetActive(false);
         SceneManager.LoadScene("GameScene");
     }
@@ -38,5 +39,17 @@ public class GameStateController : MonoBehaviour
         Time.timeScale = 1.0f;
         pauseMenu.SetActive(false);
         SceneManager.LoadScene("HomeScene");
+    }
+
+    public void ToggleMusic()
+    {
+        bool isMusicEnabled = !soundManager.musicAudioSource.mute;
+        soundManager.ToggleMusic(isMusicEnabled);
+    }
+
+    public void ToggleSFX()
+    {
+        bool isSFXEnabled = !soundManager.sfxAudioSource.mute;
+        soundManager.ToggleSFX(isSFXEnabled);
     }
 }
