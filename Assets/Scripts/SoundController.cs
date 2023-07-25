@@ -10,10 +10,13 @@ public class SoundController : MonoBehaviour
     public AudioManager audioManager;
     public MusicPlayer musicPlayer;
     public TextMeshProUGUI musicUI;
+    public TextMeshProUGUI sfxUI;
+
 
     private float trackPosition;
     private AudioClip currentTrack;
     private bool isMusicOn = true; 
+    private bool isSFXOn = true;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +29,7 @@ public class SoundController : MonoBehaviour
     void Update()
     {
         setTextMusic();
+        setTextSFX();
     }
 
         public void ToggleMusic()
@@ -41,7 +45,21 @@ public class SoundController : MonoBehaviour
 
     public void ToggleSFX()
     {
-        
+        if(isSFXOn){
+            audioManager.CanPlayAudio=false;
+            isSFXOn = false;
+        }else{
+            audioManager.CanPlayAudio=true;
+            isSFXOn = true;
+        };
+    }
+
+    void setTextSFX(){
+           if(isSFXOn){
+            sfxUI.SetText("SFX\nON");
+        }else{
+            sfxUI.SetText("SFX\nOFF");
+        }
     }
 
     void setTextMusic(){
@@ -50,5 +68,9 @@ public class SoundController : MonoBehaviour
         }else{
             musicUI.SetText("Music\nOFF");
         }
+    }
+
+    public void playSwipe(){
+        audioManager.Play("click_01");
     }
 }

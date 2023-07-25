@@ -1,10 +1,13 @@
 using System.Collections;
 using UnityEngine;
+using CarterGames.Assets.AudioManager;
+
 
 public class PlayerController : MonoBehaviour {
     
     public GameObject player;
     public HealthController healthController;
+    public SoundController soundController;
     public ScoreController scoreController;
     public SpawnCoordinator spawnCoordinator;
     public PowerController powerController;
@@ -108,6 +111,7 @@ public class PlayerController : MonoBehaviour {
         }   
     player.transform.position = targetPosition;
     spawnCoordinator.SetPlayerPosition(targetPosition);
+    soundController.playSwipe();
     }
 
     // Dato un vettore direzione, sposta il player nella direzione indicata verso il primo collider che incontra che

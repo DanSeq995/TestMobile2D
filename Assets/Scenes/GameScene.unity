@@ -1037,6 +1037,7 @@ GameObject:
   - component: {fileID: 396514844}
   - component: {fileID: 396514843}
   - component: {fileID: 396514842}
+  - component: {fileID: 396514846}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -1201,9 +1202,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a8bec65a1203654d9fe54b7d7170c8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioManager: {fileID: 0}
+  audioManager: {fileID: 396514846}
   musicPlayer: {fileID: 396514845}
   musicUI: {fileID: 70839404}
+  sfxUI: {fileID: 502989132}
 --- !u!82 &396514843
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1211,7 +1213,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 396514833}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
@@ -1302,7 +1304,7 @@ AudioSource:
     m_RotationOrder: 4
 --- !u!82 &396514844
 AudioSource:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -1310,8 +1312,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: 9c81708937d7b400f94950a59f4ca6bb, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -1403,7 +1405,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 396514833}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e64e7803cdd8f2e49ae6b4a90bc3b1ca, type: 3}
   m_Name: 
@@ -1419,6 +1421,23 @@ MonoBehaviour:
   transitionLength: 1
   introTransition: 0
   showSource: 1
+--- !u!114 &396514846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 396514833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5b3fa8af6346bd4f82b1b25932e232c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasScannedOnce: 0
+  shouldShowMixers: 0
+  shouldShowDir: 0
+  shouldShowClips: 1
+  audioManagerFile: {fileID: 11400000, guid: 930c06cf16dae044c9a5b80e06b0717f, type: 2}
 --- !u!1 &409087152
 GameObject:
   m_ObjectHideFlags: 0
@@ -1771,7 +1790,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'VFX
+  m_text: 'SFX
 
     ON'
   m_isRightToLeft: 0
@@ -2293,6 +2312,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 670326388}
   healthController: {fileID: 0}
+  soundController: {fileID: 396514842}
   scoreController: {fileID: 0}
   spawnCoordinator: {fileID: 0}
   powerController: {fileID: 0}
@@ -4085,7 +4105,7 @@ GameObject:
   - component: {fileID: 1749132114}
   - component: {fileID: 1749132113}
   m_Layer: 5
-  m_Name: VFX
+  m_Name: SFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4155,7 +4175,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1749132114}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 396514842}
+        m_TargetAssemblyTypeName: SoundController, Assembly-CSharp
+        m_MethodName: ToggleSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1749132114
 MonoBehaviour:
   m_ObjectHideFlags: 0
